@@ -1,4 +1,4 @@
-import type { Snippet } from 'svelte';
+type Snippet<Parameters extends unknown[] = []> = import('svelte').Snippet<Parameters>;
 
 const return_type: ReturnType<Snippet> = null as any;
 
@@ -38,3 +38,25 @@ const h: Snippet<[{ a: true }]> = (a) => {
 const i: Snippet = () => {
 	return return_type;
 };
+
+declare module 'svelte-nested-copy' {
+	export interface Snippet<Parameters extends unknown[] = []> {
+		(
+			this: void,
+			...args: number extends Parameters['length'] ? never : Parameters
+		): {
+			'{@render ...} must be called with a Snippet': "import type { Snippet } from 'svelte'";
+		};
+	}
+}
+
+declare module 'snippet-library' {
+	export function show(content: string | import('svelte-nested-copy').Snippet): void;
+}
+
+declare const nested_snippet: import('svelte-nested-copy').Snippet;
+
+const j: Snippet = nested_snippet;
+declare const show: typeof import('snippet-library').show;
+
+show(i);
