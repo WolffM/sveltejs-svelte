@@ -38,3 +38,10 @@ const h: Snippet<[{ a: true }]> = (a) => {
 const i: Snippet = () => {
 	return return_type;
 };
+
+declare const OtherSnippetReturn: unique symbol;
+type OtherSnippet = () => {
+	'{@render ...} must be called with a Snippet': "import type { Snippet } from 'svelte'";
+} & typeof OtherSnippetReturn;
+declare const from_other_svelte_instance: OtherSnippet;
+const j: Snippet = from_other_svelte_instance;
