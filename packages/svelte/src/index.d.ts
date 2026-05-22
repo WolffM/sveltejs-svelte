@@ -270,7 +270,9 @@ export type ComponentType<Comp extends SvelteComponent = SvelteComponent> = (new
 	element?: typeof HTMLElement;
 };
 
-declare const SnippetReturn: unique symbol;
+interface SnippetReturn {
+	'{@render ...} must be called with a Snippet': "import type { Snippet } from 'svelte'";
+}
 
 // Use an interface instead of a type, makes for better intellisense info because the type is named in more situations.
 /**
@@ -291,9 +293,7 @@ export interface Snippet<Parameters extends unknown[] = []> {
 		// rest parameter type, which is not supported. If rest parameters are added
 		// in the future, the condition can be removed.
 		...args: number extends Parameters['length'] ? never : Parameters
-	): {
-		'{@render ...} must be called with a Snippet': "import type { Snippet } from 'svelte'";
-	} & typeof SnippetReturn;
+	): SnippetReturn;
 }
 
 interface DispatchOptions {

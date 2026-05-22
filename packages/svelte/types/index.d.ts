@@ -269,7 +269,9 @@ declare module 'svelte' {
 		element?: typeof HTMLElement;
 	};
 
-	const SnippetReturn: unique symbol;
+	interface SnippetReturn {
+		'{@render ...} must be called with a Snippet': "import type { Snippet } from 'svelte'";
+	}
 
 	// Use an interface instead of a type, makes for better intellisense info because the type is named in more situations.
 	/**
@@ -290,9 +292,7 @@ declare module 'svelte' {
 			// rest parameter type, which is not supported. If rest parameters are added
 			// in the future, the condition can be removed.
 			...args: number extends Parameters['length'] ? never : Parameters
-		): {
-			'{@render ...} must be called with a Snippet': "import type { Snippet } from 'svelte'";
-		} & typeof SnippetReturn;
+		): SnippetReturn;
 	}
 
 	interface DispatchOptions {
