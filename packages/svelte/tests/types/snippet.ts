@@ -38,3 +38,19 @@ const h: Snippet<[{ a: true }]> = (a) => {
 const i: Snippet = () => {
 	return return_type;
 };
+
+declare namespace from_library {
+	interface SnippetReturn {
+		'{@render ...} must be called with a Snippet': "import type { Snippet } from 'svelte'";
+	}
+
+	export interface Snippet<Parameters extends unknown[] = []> {
+		(
+			this: void,
+			...args: number extends Parameters['length'] ? never : Parameters
+		): SnippetReturn;
+	}
+}
+
+declare const local_snippet: Snippet;
+const snippet_from_library: from_library.Snippet = local_snippet;
