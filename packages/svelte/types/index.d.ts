@@ -269,8 +269,6 @@ declare module 'svelte' {
 		element?: typeof HTMLElement;
 	};
 
-	const SnippetReturn: unique symbol;
-
 	// Use an interface instead of a type, makes for better intellisense info because the type is named in more situations.
 	/**
 	 * The type of a `#snippet` block. You can use it to (for example) express that your component expects a snippet of a certain type:
@@ -292,7 +290,7 @@ declare module 'svelte' {
 			...args: number extends Parameters['length'] ? never : Parameters
 		): {
 			'{@render ...} must be called with a Snippet': "import type { Snippet } from 'svelte'";
-		} & typeof SnippetReturn;
+		};
 	}
 
 	interface DispatchOptions {
