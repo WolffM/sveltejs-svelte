@@ -1,4 +1,5 @@
 import type { Snippet } from 'svelte';
+import type { Snippet as CopySnippet } from 'svelte-copy';
 
 const return_type: ReturnType<Snippet> = null as any;
 
@@ -38,3 +39,5 @@ const h: Snippet<[{ a: true }]> = (a) => {
 const i: Snippet = () => {
 	return return_type;
 };
+
+const j: CopySnippet = i;
