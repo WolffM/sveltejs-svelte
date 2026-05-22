@@ -17,6 +17,7 @@ coverage
 
 # build output
 .vercel
+dist/
 
 # OS-specific
 .DS_Store
