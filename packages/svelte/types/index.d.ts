@@ -269,7 +269,7 @@ declare module 'svelte' {
 		element?: typeof HTMLElement;
 	};
 
-	const SnippetReturn: unique symbol;
+	const SnippetReturn: symbol;
 
 	// Use an interface instead of a type, makes for better intellisense info because the type is named in more situations.
 	/**
