@@ -38,3 +38,18 @@ const h: Snippet<[{ a: true }]> = (a) => {
 const i: Snippet = () => {
 	return return_type;
 };
+
+declare const external_snippet_return: unique symbol;
+
+interface ExternalSnippet<Parameters extends unknown[] = []> {
+	(
+		this: void,
+		...args: number extends Parameters['length'] ? never : Parameters
+	): {
+		'{@render ...} must be called with a Snippet': "import type { Snippet } from 'svelte'";
+	} & typeof external_snippet_return;
+}
+
+declare const external_snippet: ExternalSnippet;
+
+const j: Snippet = external_snippet;

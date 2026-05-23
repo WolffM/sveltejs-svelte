@@ -270,7 +270,7 @@ export type ComponentType<Comp extends SvelteComponent = SvelteComponent> = (new
 	element?: typeof HTMLElement;
 };
 
-declare const SnippetReturn: unique symbol;
+declare const SnippetReturn: symbol;
 
 // Use an interface instead of a type, makes for better intellisense info because the type is named in more situations.
 /**
